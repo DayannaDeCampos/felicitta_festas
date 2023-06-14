@@ -13,15 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-       Schema::disableForeignKeyConstraints();
-
-        Schema::create('leitura', function (Blueprint $table) {
+        Schema::create('categoriacardapio', function (Blueprint $table) {
             $table->id();
-            $table->string('nomemac', 120);
-            $table->date('dataleitura');
-            $table->string('horaleitura',20);
-            $table->float('valorsensor');
+            $table->string('nome',100);
             $table->timestamps();
+        });
+
+        Schema::disableForeignKeyConstraints();
+
+        Schema::table('cardapio', function (Blueprint $table) {
+            $table->foreignId('categoriacardapio_id')->nullable()->constrained('categoriacardapio')->default(null);
         });
 
         Schema::enableForeignKeyConstraints();
@@ -35,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('categoriacardapio');
     }
 };

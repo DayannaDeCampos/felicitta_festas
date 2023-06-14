@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('filme', function (Blueprint $table) {
+        Schema::create('pacote', function (Blueprint $table) {
             $table->id();
             $table->string('nome',120);
-            $table->varchar('horario',50);
-            $table->string('sinopse',500);
-            $table->string('imagemfilme',150)->nullable();
+            $table->string('descricao',700);
+            $table->string('valor',100);
+            $table->string('imagempacote',150)->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('filme');
+        Schema::dropIfExists('pacote');
     }
 };

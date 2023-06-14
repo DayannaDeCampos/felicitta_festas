@@ -2,10 +2,6 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsuarioController;
-use App\Http\Controllers\FilmeController;
-use App\Http\Controllers\ProdutoController;
-use App\Http\Controllers\LeituraController;
-use App\Http\Controllers\FuncionarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,89 +25,11 @@ Route::get('dashboard', function () {
     ->middleware(['auth', 'verified'])
     ->name('principal');
 
-    Route::get('leitura', function () {
-        return view('leitura');
-    })
-        ->middleware(['auth', 'verified'])
-        ->name('leitura');
-    
 
-    Route::get('cavaleiros', function () {
-        return view('cavaleiros');
-    })
-        ->middleware(['auth', 'verified'])
-        ->name('cavaleiros');
-
-        Route::get('comprar', function () {
-            return view('comprar');
-        })
-            ->middleware(['auth', 'verified'])
-            ->name('comprar');
-
-            Route::get('donnie', function () {
-                return view('donnie');
-            })
-                ->middleware(['auth', 'verified'])
-                ->name('donnie');
-
-                Route::get('guardioesdg', function () {
-                    return view('guardioesdg');
-                })
-                    ->middleware(['auth', 'verified'])
-                    ->name('guardioesdg');
-
-                    Route::get('john', function () {
-                        return view('john');
-                    })
-                        ->middleware(['auth', 'verified'])
-                        ->name('john');
-
-                        Route::get('supermario', function () {
-                            return view('supermario');
-                        })
-                            ->middleware(['auth', 'verified'])
-                            ->name('supermario');
-
-                            Route::get('mortedodemonio', function () {
-                                return view('mortedodemonio');
-    })
-    ->middleware(['auth', 'verified'])
-    ->name('mortedodemonio');
-
-    Route::get('velozesf', function () {
-    return view('velozesf');
-    })
-    ->middleware(['auth', 'verified'])
-    ->name('velozesf');
-    
-    Route::get('principal', function () {
-        return view('principal');
-    })
-        ->middleware(['auth', 'verified'])
-        ->name('principal');
-
-     Route::get('sobre', function () {
-            return view('sobre');
-        })
-            ->middleware(['auth', 'verified'])
-            ->name('sobre');
 
 Route::middleware('auth')->group(function () {
     Route::resource('usuario', UsuarioController::class);
     Route::post('usuario/search', [UsuarioController::class, 'search']);
-
-    Route::resource('filme', FilmeController::class);
-    Route::post('filme/search', [FilmeController::class, 'search']);
-
-    Route::resource('leitura', LeituraController::class);
-    Route::post('leitura/search', [LeituraController::class, 'search']);
-
-    Route::resource('produto', ProdutoController::class);
-    Route::post('produto/search', [ProdutoController::class, 'search']);
-
-    Route::resource('funcionario', FuncionarioController::class);
-    Route::post('funcionario/search', [FuncionarioController::class, 'search']);
-
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name(
