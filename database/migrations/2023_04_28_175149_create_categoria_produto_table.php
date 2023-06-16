@@ -20,11 +20,16 @@ return new class extends Migration
         });
 
         Schema::disableForeignKeyConstraints();
-
-        Schema::table('produto', function (Blueprint $table) {
+        Schema::create('produto', function (Blueprint $table) {
+            $table->id();
+            $table->string('nome',120);
+            $table->string('quantidade',50);
+            $table->string('valor',50);
+            $table->string('imagemproduto',150)->nullable();
             $table->foreignId('categoriaproduto_id')->nullable()->constrained('categoriaproduto')->default(null);
+            $table->timestamps();
         });
-
+    
         Schema::enableForeignKeyConstraints();
 
     }
@@ -39,3 +44,5 @@ return new class extends Migration
         Schema::dropIfExists('categoriaproduto');
     }
 };
+
+?>

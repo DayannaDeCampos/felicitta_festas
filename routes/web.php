@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\ProdutoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +30,9 @@ Route::get('dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::resource('usuario', UsuarioController::class);
     Route::post('usuario/search', [UsuarioController::class, 'search']);
+
+    Route::resource('produto', ProdutoController::class);
+    Route::post('produto/search', [ProdutoController::class, 'search']);
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name(
