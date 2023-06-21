@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +31,9 @@ Route::get('dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::resource('usuario', UsuarioController::class);
     Route::post('usuario/search', [UsuarioController::class, 'search']);
+
+    Route::resource('cliente', ClienteController::class);
+    Route::post('cliente/search', [ClienteController::class, 'search']);
 
     Route::resource('produto', ProdutoController::class);
     Route::post('produto/search', [ProdutoController::class, 'search']);
