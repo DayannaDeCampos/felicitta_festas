@@ -35,6 +35,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('cliente', ClienteController::class);
     Route::post('cliente/search', [ClienteController::class, 'search']);
 
+    Route::resource('pacote', PacoteController::class);
+    Route::post('pacote/search', [PacoteController::class, 'search']);
+
+    Route::resource('cardapio', CardapioController::class);
+    Route::post('cardapio/search', [CardapioController::class, 'search']);
+
     Route::resource('produto', ProdutoController::class);
     Route::post('produto/search', [ProdutoController::class, 'search']);
 
