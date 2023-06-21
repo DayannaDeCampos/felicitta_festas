@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\CardapioController;
+use App\Http\Controllers\PacoteController;
 use Illuminate\Support\Facades\Route;
 
 /*
