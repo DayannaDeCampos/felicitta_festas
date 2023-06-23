@@ -43,9 +43,28 @@ CREATE TABLE IF NOT EXISTS `categoriacardapio` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela db_aula.categoriacardapio: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela db_aula.categoriacardapio: ~3 rows (aproximadamente)
+INSERT INTO `categoriacardapio` (`id`, `nome`, `created_at`, `updated_at`) VALUES
+	(1, 'Doces', NULL, NULL),
+	(2, 'Salgados', NULL, NULL),
+	(3, 'Bebidas', NULL, NULL);
+
+-- Copiando estrutura para tabela db_aula.categoriapacote
+CREATE TABLE IF NOT EXISTS `categoriapacote` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Copiando dados para a tabela db_aula.categoriapacote: ~3 rows (aproximadamente)
+INSERT INTO `categoriapacote` (`id`, `nome`, `created_at`, `updated_at`) VALUES
+	(1, 'Básico', NULL, NULL),
+	(2, 'Econômico', NULL, NULL),
+	(3, 'Premium', NULL, NULL);
 
 -- Copiando estrutura para tabela db_aula.categoriaproduto
 CREATE TABLE IF NOT EXISTS `categoriaproduto` (
@@ -171,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `produto` (
   CONSTRAINT `produto_categoriaproduto_id_foreign` FOREIGN KEY (`categoriaproduto_id`) REFERENCES `categoriaproduto` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela db_aula.produto: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela db_aula.produto: ~0 rows (aproximadamente)
 INSERT INTO `produto` (`id`, `nome`, `quantidade`, `valor`, `imagemproduto`, `categoriaproduto_id`, `created_at`, `updated_at`) VALUES
 	(1, 'Cama Elástica', '8', 'R$ 300,00', NULL, 3, '2023-06-16 20:46:22', '2023-06-16 20:46:22');
 
@@ -189,7 +208,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela db_aula.users: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela db_aula.users: ~0 rows (aproximadamente)
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 	(1, 'admin', 'admin@admin.com', NULL, '$2y$10$64proLIND7wcWsOWRGXL6.Yl8Fnwmbv6qFmqfJFzEmaXn/eOpMmki', NULL, '2023-06-16 20:07:03', '2023-06-16 20:07:03');
 

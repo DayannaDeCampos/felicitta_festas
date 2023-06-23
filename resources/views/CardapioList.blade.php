@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Felicittá Festas</title>
+        <title>cardapio List </title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="{{asset('assets/favicon.ico.png')}}" />
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico.png" />
         <!--Icone fonte awsome-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Bootstrap icons-->
@@ -29,38 +29,32 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url('/principal') }}">Filmes</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{url('/principal') }}">Filmes</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ url('/sobre') }}">Sobre nós</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mais opções</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{ url('/filme') }}">Lista e cadastro de filmes</a></li>
+                                <li><a class="dropdown-item" href="{{url('/filme') }}">Lista e cadastro de filmes</a></li>
                                 <li><hr class="dropdown-divider" /></li>
                                 <li><a class="dropdown-item" href="{{ url('/produto') }}">Lista e cadastro de produtos  </a></li>
                                 <li><a class="dropdown-item" href="{{ url('/funcionario') }}">Lista e cadastro de funcionários</a></li>
-                                <li><a class="dropdown-item" href="{{ url('/leitura') }}">Leitura Miguel</a></li>
-
                             </ul>
                         </li>
                     </ul>
-                    <a class="btn btn-dark" href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class='fas fa-sign-out-alt'></i> {{ __('Sair') }}</a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
                 </div>
             </div>
         </nav>
 
     <div class="container">
-        <h1>Cardápio {{ request()->id }}</h1>
+        <h1>Listagem de cardapios {{ request()->id }}</h1>
         <form action="{{ action('App\Http\Controllers\CardapioController@search') }}" method="post">
             @csrf
             <div class="row">
                 <div class="col-2">
                     <select name="campo" class="form-select">
                         <option value="nome">Nome</option>
+                        <option value="quantidade">Quantidade</option>
+                        <option value="valor">Valor</option>
                     </select>
                 </div>
                 <div class="col-4">
@@ -72,7 +66,6 @@
                     </button>
                     <a class="btn btn-dark" href="{{ action('App\Http\Controllers\CardapioController@create') }}"><i
                             class="fa-solid fa-plus"></i> Cadastrar</a>
-
                 </div>
             </div>
         </form>
@@ -96,7 +89,7 @@
                     <tr>
                         <td scope='row'>{{ $item->id }}</td>
                         <td>{{ $item->nome }}</td>
-                        <td>{{ $item->quantidade }}</td>
+                        <td>{{ $item->quantidade}}</td>
                         <td>{{ $item->valor }}</td>
                         <td>{{ $item->categoriacardapio->nome }}</td>
                         <td><img src="/storage/{{ $nome_imagem }}" width="100px" class="img-thumbnail" /> </td>
