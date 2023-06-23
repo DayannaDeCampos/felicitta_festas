@@ -23,10 +23,10 @@ Route::get('/', function () {
 });
 
 Route::get('dashboard', function () {
-    return view('principal');
+    return view('admin');
 })
     ->middleware(['auth', 'verified'])
-    ->name('principal');
+    ->name('admin');
 
 
 

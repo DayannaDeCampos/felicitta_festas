@@ -28,10 +28,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#services">Sobre nós</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">Pacotes</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#team">Grupo</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{url('/produto')}}">Produtos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{url('/cardapio')}}">Cardapio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{url('/pacote')}}">Pacotes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{url('/cliente')}}">Clientes</a></li>
+
                     </ul>
                     @if (Route::has('login'))
                     @auth

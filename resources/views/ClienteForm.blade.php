@@ -10,9 +10,51 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-</head>
+        <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
+    </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="#page-top" class="d-inline-block align-text-top">Felicittá Festas
+               </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars ms-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="{{url('/produto')}}">Produtos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('/cardapio')}}">Cardapio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('/pacote')}}">Pacotes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('/cliente')}}">Clientes</a></li>
+                </ul>
+                @if (Route::has('login'))
+                @auth
+                    <a href="{{ url('/principal') }}" class="btn btn-dark"></a>
+                    <a class="btn btn-dark" href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class='fas fa-sign-out-alt'></i> {{ __('Sair') }}</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-dark">Log in</a>
+
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="btn btn-dark">Cadastre-se</a>
+                    @endif
+                @endauth
+            </div>
+        @endif
+            </div>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <div class="container">
    @php
         if (!empty($cliente->id)) {
