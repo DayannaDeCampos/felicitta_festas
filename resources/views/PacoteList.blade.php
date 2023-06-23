@@ -22,32 +22,51 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container px-4 px-lg-5">
-                <img src="{{asset('assets/favicon.ico.png')}}" width="50px" height="50px"> <br> <br>
-                <a class="navbar-brand" href="{{url('/principal') }}">Star Cine</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{url('/principal') }}">Filmes</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ url('/sobre') }}">Sobre nós</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mais opções</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{url('/filme') }}">Lista e cadastro de filmes</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="{{ url('/produto') }}">Lista e cadastro de produtos  </a></li>
-                                <li><a class="dropdown-item" href="{{ url('/funcionario') }}">Lista e cadastro de funcionários</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="#page-top" class="d-inline-block align-text-top">Felicittá Festas
+               </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars ms-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="{{url('/produto')}}">Produtos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('/cardapio')}}">Cardapio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('/pacote')}}">Pacotes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('/cliente')}}">Clientes</a></li>
+                </ul>
+                @if (Route::has('login'))
+                @auth
+                    <a href="{{ url('/principal') }}" class="btn btn-dark"></a>
+                    <a class="btn btn-dark" href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class='fas fa-sign-out-alt'></i> {{ __('Sair') }}</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-dark">Log in</a>
+
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="btn btn-dark">Cadastre-se</a>
+                    @endif
+                @endauth
             </div>
-        </nav>
+        @endif
+            </div>
+        </div>
+    </nav>
+<br>
+<br>
+<br>
+<br>
+<br>
 
     <div class="container">
         <h1>Listagem de Pacotes {{ request()->id }}</h1>
-        <form action="{{ action('App\Http\Controllers\ProdutoController@search') }}" method="post">
+        <form action="{{ action('App\Http\Controllers\PacoteController@search') }}" method="post">
             @csrf
             <div class="row">
                 <div class="col-2">
@@ -63,7 +82,7 @@
                     <button class="btn btn-dark" type="submit">
                         <i class="fa-solid fa-magnifying-glass"></i> Buscar
                     </button>
-                    <a class="btn btn-dark" href="{{ action('App\Http\Controllers\ProdutoController@create') }}"><i
+                    <a class="btn btn-dark" href="{{ action('App\Http\Controllers\PacoteController@create') }}"><i
                             class="fa-solid fa-plus"></i> Cadastrar</a>
                 </div>
             </div>
@@ -81,22 +100,22 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($produtos as $item)
+                @foreach ($pacotes as $item)
                     @php
-                        $nome_imagem = !empty($item->imagemproduto) ? $item->imagemproduto : 'sem_imagem.jpg';
+                        $nome_imagem = !empty($item->imagem) ? $item->imagem : 'sem_imagem.jpg';
                     @endphp
                     <tr>
                         <td scope='row'>{{ $item->id }}</td>
                         <td>{{ $item->nome }}</td>
-                        <td>{{ $item->quantidade}}</td>
+                        <td>{{ $item->descricao}}</td>
                         <td>{{ $item->valor }}</td>
-                        <td>{{ $item->categoriaproduto->nome }}</td>
+                        <td>{{ $item->categoriapacote->nome }}</td>
                         <td><img src="/storage/{{ $nome_imagem }}" width="100px" class="img-thumbnail" /> </td>
-                        <td><a href="{{ action('App\Http\Controllers\ProdutoController@edit', $item->id) }}"><i
+                        <td><a href="{{ action('App\Http\Controllers\PacoteController@edit', $item->id) }}"><i
                                     class='fa-solid fa-pen-to-square' style='color:orange;'></i></a></td>
                         <td>
                             <form method="POST"
-                                action="{{ action('App\Http\Controllers\ProdutoController@destroy', $item->id) }}">
+                                action="{{ action('App\Http\Controllers\PacoteController@destroy', $item->id) }}">
                                 <input type="hidden" name="_method" value="DELETE">
                                 @csrf
                                 <button type="submit" onclick='return confirm("Deseja Excluir?")'
