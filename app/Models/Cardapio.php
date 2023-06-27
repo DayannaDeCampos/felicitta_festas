@@ -15,7 +15,7 @@ class Cardapio extends Model
     ];
 
     public function categoriacardapio(){
-        return $this->belongsTo(Categoriacardapio::class,'categoriacardapio_id','id');
+        return $this->belongsTo(CategoriaCardapio::class,'categoriacardapio_id','id');
     }
 
 }

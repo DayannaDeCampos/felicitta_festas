@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>cardapio List </title>
+        <title>Cardapio List </title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico.png" />
         <!--Icone fonte awsome-->
@@ -19,8 +19,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-
-    </head>
+</head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -59,20 +58,20 @@
             </div>
         </div>
     </nav>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+<br>
+<br>
+<br>
+<br>
+<br>
     <div class="container">
-        <h1>Listagem de cardapios {{ request()->id }}</h1>
+        <h1>Cardapio {{ request()->id }}</h1>
         <form action="{{ action('App\Http\Controllers\CardapioController@search') }}" method="post">
             @csrf
             <div class="row">
                 <div class="col-2">
                     <select name="campo" class="form-select">
                         <option value="nome">Nome</option>
-                        <option value="quantidade">Quantidade</option>
+                        <option value="quantidade">Qtd. Estoque</option>
                         <option value="valor">Valor</option>
                     </select>
                 </div>
@@ -101,7 +100,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($cardapio as $item)
+                @foreach ($cardapios as $item)
                     @php
                         $nome_imagem = !empty($item->imagemcardapio) ? $item->imagemcardapio : 'sem_imagem.jpg';
                     @endphp
@@ -112,11 +111,11 @@
                         <td>{{ $item->valor }}</td>
                         <td>{{ $item->categoriacardapio->nome }}</td>
                         <td><img src="/storage/{{ $nome_imagem }}" width="100px" class="img-thumbnail" /> </td>
-                        <td><a href="{{ action('App\Http\Controllers\CardapioController@edit', $item->id) }}"><i
+                        <td><a href="{{ action('App\Http\Controllers\cardapioController@edit', $item->id) }}"><i
                                     class='fa-solid fa-pen-to-square' style='color:orange;'></i></a></td>
                         <td>
                             <form method="POST"
-                                action="{{ action('App\Http\Controllers\CardapioController@destroy', $item->id) }}">
+                                action="{{ action('App\Http\Controllers\cardapioController@destroy', $item->id) }}">
                                 <input type="hidden" name="_method" value="DELETE">
                                 @csrf
                                 <button type="submit" onclick='return confirm("Deseja Excluir?")'

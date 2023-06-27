@@ -3,25 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Pacote;
-use App\Models\CategoriaPacote;
+use App\Models\Cardapio;
+use App\Models\CategoriaCardapio;
 use Illuminate\Support\Facades\Storage;
 
-class PacoteController extends Controller
+class CardapioController extends Controller
 {
     function index()
     {
-        $pacotes = Pacote::All();
+        $cardapios = Cardapio::All();
         // dd($usuarios);
 
-        return view('PacoteList')->with(['pacotes' => $pacotes]);
+        return view('cardapioList')->with(['cardapios' => $cardapios]);
     }
 
     function create()
     {
-        $categoriapacotes = Categoriapacote::orderBy('nome')->get();
+        $categoriacardapios = Categoriacardapio::orderBy('nome')->get();
 
-        return view('PacoteForm')->with(['categoriapacotes' => $categoriapacotes]);
+        return view('CardapioForm')->with(['categoriacardapios' => $categoriacardapios]);
     }
 
     function store(Request $request)
@@ -29,95 +29,17 @@ class PacoteController extends Controller
         $request->validate(
             [
                 'nome' => 'required | max: 120',
-                'descricao' => 'required  | max: 700',
+                'quantidade' => 'required  | max: 50',
                 'valor' => 'required | max: 50',
 
-                'categoriapacote_id' => ' nullable',
-                'imagem' => ' nullable|image|mimes:jpeg,jpg,png|max:2048',
+                'categoriacardapio_id' => ' nullable',
+                'imagemcardapio' => ' nullable|image|mimes:jpeg,jpg,png|max:2048',
             ],
             [
                 'nome.required' => 'O nome é obrigatório',
                 'nome.max' => 'Só é permitido 120 caracteres',
-                'descricao.required' => 'A quantidade é obrigatório',
-                'descricao.max' => 'Só é permitido 700 caracteres',
-                'valor.required' => 'O valor é obrigatório',
-                'valor.max' => 'Só é permitido 50 caracteres',
-
-            ]
-        );
-        //dd( $request->nome);
-
-
-        $dados = [
-            'nome' => $request->nome,
-            'descricao' => $request->descricao,
-            'valor' => $request->valor,
-            'categoriapacote_id' => $request->categoriapacote_id,
-        ];
-
-        $imagem = $request->file('imagem');
-        $nome_arquivo = '';
-        //verifica se o campo imagem foi passado uma imagem
-        if ($imagem) {
-            $nome_arquivo = date('YmdHis') . '.' . $imagem->getClientOriginalExtension();
-
-            $diretorio = 'imagem/';
-            //salva a imagem em uma pasta
-            $imagem->storeAs($diretorio, $nome_arquivo, 'public');
-            //adiciona ao vetor o diretorio do arquivo e o nome
-            $dados['imagem'] = $diretorio . $nome_arquivo;
-        }
-
-        //dd( $request->nome);
-        //passa o vetor com os dados do formulário como parametro para ser salvo
-        Pacote::create($dados);
-
-        return \redirect('pacote')->with('success', 'Cadastrado com sucesso!');
-    }
-
-    function edit($id)
-    {
-        //select * from usuario where id = $id;
-        $pacote = Pacote::findOrFail($id);
-        //dd($usuario);
-        $categoriapacotes = Categoriapacote::orderBy('nome')->get();
-
-        return view('PacoteForm')->with([
-            'pacote' => $pacote,
-            'categoriapacotes' => $categoriapacotes,
-        ]);
-    }
-
-    function show($id)
-    {
-        //select * from usuario where id = $id;
-        $pacote = Pacote::findOrFail($id);
-        //dd($usuario);
-        $categoriapacotes = Categoriapacote::orderBy('nome')->get();
-
-        return view('PacoteForm')->with([
-            'pacote' => $pacote,
-            'categoriapacotes' => $categoriapacotes,
-        ]);
-    }
-
-    function update(Request $request)
-    {
-        //dd( $request->nome);
-        $request->validate(
-            [
-                'nome' => 'required | max: 120',
-                'descricao' => 'required  | max: 700',
-                'valor' => 'required | max: 50',
-
-                'categoriapacote_id' => ' nullable',
-                'imagem' => ' nullable|image|mimes:jpeg,jpg,png|max:2048',
-            ],
-            [
-                'nome.required' => 'O nome é obrigatório',
-                'nome.max' => 'Só é permitido 120 caracteres',
-                'descricao.required' => 'A quantidade é obrigatório',
-                'descricao.max' => 'Só é permitido 700 caracteres',
+                'quantidade.required' => 'A quantidade é obrigatório',
+                'quantidade.max' => 'Só é permitido 50 caracteres',
                 'valor.required' => 'O valor é obrigatório',
                 'valor.max' => 'Só é permitido 50 caracteres',
 
@@ -130,44 +52,122 @@ class PacoteController extends Controller
             'nome' => $request->nome,
             'quantidade' => $request->quantidade,
             'valor' => $request->valor,
-            'categoriapacote_id' => $request->categoriapacote_id,
+            'categoriacardapio_id' => $request->categoriacardapio_id,
         ];
-        $imagem = $request->file('imagem');
+
+        $imagemcardapio = $request->file('imagemcardapio');
         $nome_arquivo = '';
         //verifica se o campo imagem foi passado uma imagem
-        if ($imagem) {
-            $nome_arquivo = date('YmdHis') . '.' . $imagem->getClientOriginalExtension();
+        if ($imagemcardapio) {
+            $nome_arquivo = date('YmdHis') . '.' . $imagemcardapio->getClientOriginalExtension();
 
             $diretorio = 'imagem/';
             //salva a imagem em uma pasta
-            $imagem->storeAs($diretorio, $nome_arquivo, 'public');
+            $imagemcardapio->storeAs($diretorio, $nome_arquivo, 'public');
             //adiciona ao vetor o diretorio do arquivo e o nome
-            $dados['imagem'] = $diretorio . $nome_arquivo;
+            $dados['imagemcardapio'] = $diretorio . $nome_arquivo;
+        }
+
+        //dd( $request->nome);
+        //passa o vetor com os dados do formulário como parametro para ser salvo
+        cardapio::create($dados);
+
+        return \redirect('cardapio')->with('success', 'Cadastrado com sucesso!');
+    }
+
+    function edit($id)
+    {
+        //select * from usuario where id = $id;
+        $cardapio = Cardapio::findOrFail($id);
+        //dd($usuario);
+        $categoriacardapios = CategoriaCardapio::orderBy('nome')->get();
+
+        return view('cardapioForm')->with([
+            'cardapio' => $cardapio,
+            'categoriacardapios' => $categoriacardapios,
+        ]);
+    }
+
+    function show($id)
+    {
+        //select * from usuario where id = $id;
+        $cardapio = Cardapio::findOrFail($id);
+        //dd($usuario);
+        $categoriacardapios = CategoriaCardapio::orderBy('nome')->get();
+
+        return view('cardapioForm')->with([
+            'cardapio' => $cardapio,
+            'categoriacardapios' => $categoriacardapios,
+        ]);
+    }
+
+    function update(Request $request)
+    {
+        //dd( $request->nome);
+        $request->validate(
+            [
+                'nome' => 'required | max: 120',
+                'quantidade' => 'required  | max: 50',
+                'valor' => 'required | max: 50',
+
+                'categoriacardapio_id' => ' nullable',
+                'imagemcardapio' => ' nullable|image|mimes:jpeg,jpg,png|max:2048',
+            ],
+            [
+                'nome.required' => 'O nome é obrigatório',
+                'nome.max' => 'Só é permitido 120 caracteres',
+                'quantidade.required' => 'A quantidade é obrigatório',
+                'quantidade.max' => 'Só é permitido 50 caracteres',
+                'valor.required' => 'O valor é obrigatório',
+                'valor.max' => 'Só é permitido 50 caracteres',
+
+            ]
+        );
+        //dd( $request->nome);
+
+
+        $dados = [
+            'nome' => $request->nome,
+            'quantidade' => $request->quantidade,
+            'valor' => $request->valor,
+            'categoriacardapio_id' => $request->categoriacardapio_id,
+        ];
+        $imagemcardapio = $request->file('imagemcardapio');
+        $nome_arquivo = '';
+        //verifica se o campo imagem foi passado uma imagem
+        if ($imagemcardapio) {
+            $nome_arquivo = date('YmdHis') . '.' . $imagemcardapio->getClientOriginalExtension();
+
+            $diretorio = 'imagem/';
+            //salva a imagem em uma pasta
+            $imagemcardapio->storeAs($diretorio, $nome_arquivo, 'public');
+            //adiciona ao vetor o diretorio do arquivo e o nome
+            $dados['imagemcardapio'] = $diretorio . $nome_arquivo;
         }
 
         //dd($dados);
 
-        Pacote::updateOrCreate(
+        Cardapio::updateOrCreate(
             ['id' => $request->id],
             $dados
         );
 
         return \redirect()->action(
-            'App\Http\Controllers\PacoteController@index'
+            'App\Http\Controllers\cardapioController@index'
         );
     }
     //
 
     function destroy($id)
     {
-        $pacote = Pacote::findOrFail($id);
-        if($pacote->imagem){
-            Storage::disk('public')->delete($pacote->imagem);
+        $cardapio = Cardapio::findOrFail($id);
+        if($cardapio->imagemcardapio){
+            Storage::disk('public')->delete($cardapio->imagemcardapio);
         }
-        $pacote->delete();
+        $cardapio->delete();
 
         return \redirect()->action(
-            'App\Http\Controllers\PacoteController@index'
+            'App\Http\Controllers\cardapioController@index'
         );
 
     }
@@ -176,12 +176,12 @@ class PacoteController extends Controller
             $campo = $request->campo;
 
             if (!empty($campo)) {
-                $pacotes = Pacote::where($campo, 'like', '%' . $request->valor . '%')->get();
+                $cardapios = Cardapio::where($campo, 'like', '%' . $request->valor . '%')->get();
             } else {
-                $pacotes = Pacote::all();
+                $cardapios = Cardapio::all();
             }
 
-        return view('PacoteList')->with(['pacotes' => $pacotes]);
+        return view('CardapioList')->with(['cardapios' => $cardapios]);
     }
 }
 // npm install --save-dev vite laravel-vite-plugin
