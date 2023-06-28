@@ -65,11 +65,8 @@ class ClienteController extends Controller
         //select * from uliente where id = $id;
         $cliente = Cliente::findOrFail($id);
         //dd($uliente);
-        $categoriaclientes = Categoriacliente::orderBy('nome')->get();
-
         return view('ClienteForm')->with([
             'cliente' => $cliente,
-            'categoriaclientes' => $categoriaclientes,
         ]);
     }
 
@@ -78,11 +75,9 @@ class ClienteController extends Controller
         //select * from cliente where id = $id;
         $cliente = Cliente::findOrFail($id);
         //dd($uliente);
-        $categorias = Categoriacliente::orderBy('nome')->get();
 
         return view('ClienteForm')->with([
             'cliente' => $cliente,
-            'categoriaclientes' => $categoriaclientes,
         ]);
     }
 
