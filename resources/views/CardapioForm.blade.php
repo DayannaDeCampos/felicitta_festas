@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>cardapio Form</title>
+    <title>Cardápio Form</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -25,7 +25,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                     <li class="nav-item"><a class="nav-link" href="{{url('/produto')}}">Produtos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{url('/cardapio')}}">Cardapio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('/cardapio')}}">Cardápio</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('/pacote')}}">Pacotes</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('/cliente')}}">Clientes</a></li>
                 </ul>
@@ -64,7 +64,7 @@
             $route = route('cardapio.store');
         }
     @endphp
-        <h1>Formulário de cardapios</h1>
+        <h1>Cardápio Cadastro</h1>
 
         @if ($errors->any())
             <div class="alert alert-danger">

@@ -29,7 +29,7 @@ class PacoteController extends Controller
         $request->validate(
             [
                 'nome' => 'required | max: 120',
-                'descricao' => 'required  | max: 700',
+                'descricao' => 'required  | max: 50',
                 'valor' => 'required | max: 50',
 
                 'categoriapacote_id' => ' nullable',
@@ -38,8 +38,8 @@ class PacoteController extends Controller
             [
                 'nome.required' => 'O nome é obrigatório',
                 'nome.max' => 'Só é permitido 120 caracteres',
-                'descricao.required' => 'A quantidade é obrigatório',
-                'descricao.max' => 'Só é permitido 700 caracteres',
+                'descricao.required' => 'A descrição é obrigatória',
+                'descricao.max' => 'Só é permitido 50 caracteres',
                 'valor.required' => 'O valor é obrigatório',
                 'valor.max' => 'Só é permitido 50 caracteres',
 
@@ -107,7 +107,7 @@ class PacoteController extends Controller
         $request->validate(
             [
                 'nome' => 'required | max: 120',
-                'descricao' => 'required  | max: 700',
+                'descricao' => 'required  | max: 50',
                 'valor' => 'required | max: 50',
 
                 'categoriapacote_id' => ' nullable',
@@ -116,8 +116,8 @@ class PacoteController extends Controller
             [
                 'nome.required' => 'O nome é obrigatório',
                 'nome.max' => 'Só é permitido 120 caracteres',
-                'descricao.required' => 'A quantidade é obrigatório',
-                'descricao.max' => 'Só é permitido 700 caracteres',
+                'descricao.required' => 'A descrição é obrigatória',
+                'descricao.max' => 'Só é permitido 50 caracteres',
                 'valor.required' => 'O valor é obrigatório',
                 'valor.max' => 'Só é permitido 50 caracteres',
 
@@ -128,7 +128,7 @@ class PacoteController extends Controller
 
         $dados = [
             'nome' => $request->nome,
-            'quantidade' => $request->quantidade,
+            'descricao' => $request->descricao,
             'valor' => $request->valor,
             'categoriapacote_id' => $request->categoriapacote_id,
         ];
@@ -161,9 +161,9 @@ class PacoteController extends Controller
     function destroy($id)
     {
         $pacote = Pacote::findOrFail($id);
-        if($pacote->imagem){
-            Storage::disk('public')->delete($pacote->imagem);
-        }
+            if (Storage::disk('public')->exists($pacote->imagem)) {
+                Storage::disk('public')->delete($pacote->imagem);
+            }
         $pacote->delete();
 
         return \redirect()->action(

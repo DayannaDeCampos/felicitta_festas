@@ -29,7 +29,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link" href="{{url('/produto')}}">Produtos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{url('/cardapio')}}">Cardapio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{url('/cardapio')}}">Cardápio</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{url('/pacote')}}">Pacotes</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{url('/cliente')}}">Clientes</a></li>
 

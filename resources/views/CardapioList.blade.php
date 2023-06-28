@@ -33,7 +33,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                     <li class="nav-item"><a class="nav-link" href="{{url('/produto')}}">Produtos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{url('/cardapio')}}">Cardapio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('/cardapio')}}">Cardápio</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('/pacote')}}">Pacotes</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('/cliente')}}">Clientes</a></li>
                 </ul>
@@ -64,7 +64,7 @@
 <br>
 <br>
     <div class="container">
-        <h1>Cardapio {{ request()->id }}</h1>
+        <h1>Cardápio {{ request()->id }}</h1>
         <form action="{{ action('App\Http\Controllers\CardapioController@search') }}" method="post">
             @csrf
             <div class="row">
@@ -109,13 +109,13 @@
                         <td>{{ $item->nome }}</td>
                         <td>{{ $item->quantidade}}</td>
                         <td>{{ $item->valor }}</td>
-                        <td>{{ $item->categoriacardapio->nome }}</td>
+                        <td>{{ $item->categoriacardapio->nome ?? "" }}</td>
                         <td><img src="/storage/{{ $nome_imagem }}" width="100px" class="img-thumbnail" /> </td>
-                        <td><a href="{{ action('App\Http\Controllers\cardapioController@edit', $item->id) }}"><i
+                        <td><a href="{{ action('App\Http\Controllers\CardapioController@edit', $item->id) }}"><i
                                     class='fa-solid fa-pen-to-square' style='color:orange;'></i></a></td>
                         <td>
                             <form method="POST"
-                                action="{{ action('App\Http\Controllers\cardapioController@destroy', $item->id) }}">
+                                action="{{ action('App\Http\Controllers\CardapioController@destroy', $item->id) }}">
                                 <input type="hidden" name="_method" value="DELETE">
                                 @csrf
                                 <button type="submit" onclick='return confirm("Deseja Excluir?")'

@@ -25,7 +25,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                     <li class="nav-item"><a class="nav-link" href="{{url('/produto')}}">Produtos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{url('/cardapio')}}">Cardapio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('/cardapio')}}">Cardápio</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('/pacote')}}">Pacotes</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('/cliente')}}">Clientes</a></li>
                 </ul>
@@ -103,7 +103,7 @@
             <div class="col-3">
                 <label class="form-label">Categoria</label><br>
                 <select name="categoriapacote_id" class="form-select">
-                    @foreach ($categoriapacote as $item)
+                    @foreach ($categoriapacotes as $item)
                         <option value="{{ $item->id }}">{{ $item->nome }}</option>
                     @endforeach
                 </select>

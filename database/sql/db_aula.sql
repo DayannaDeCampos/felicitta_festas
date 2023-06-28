@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `cardapio` (
   PRIMARY KEY (`id`),
   KEY `cardapio_categoriacardapio_id_foreign` (`categoriacardapio_id`),
   CONSTRAINT `cardapio_categoriacardapio_id_foreign` FOREIGN KEY (`categoriacardapio_id`) REFERENCES `categoriacardapio` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Copiando dados para a tabela db_aula.cardapio: ~0 rows (aproximadamente)
 
@@ -54,7 +54,7 @@ INSERT INTO `categoriacardapio` (`id`, `nome`, `created_at`, `updated_at`) VALUE
 -- Copiando estrutura para tabela db_aula.categoriapacote
 CREATE TABLE IF NOT EXISTS `categoriapacote` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `nome` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nome` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -120,9 +120,9 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela db_aula.migrations: ~8 rows (aproximadamente)
+-- Copiando dados para a tabela db_aula.migrations: ~0 rows (aproximadamente)
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
 	(2, '2014_10_12_100000_create_password_resets_table', 1),
@@ -131,21 +131,27 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(5, '2021_06_14_000005_create_categoriacardapio', 1),
 	(6, '2023_04_14_165129_create_cliente', 1),
 	(7, '2023_04_28_175149_create_categoria_produto_table', 1),
-	(8, '2023_06_14_173020_create_pacote_tabela', 1);
+	(9, '2023_06_23_170353_categoriapacote', 2),
+	(10, '2023_06_23_170425_pacote', 2);
 
 -- Copiando estrutura para tabela db_aula.pacote
 CREATE TABLE IF NOT EXISTS `pacote` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `nome` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descricao` varchar(700) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `valor` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `imagempacote` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nome` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descricao` varchar(700) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `valor` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `imagem` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `categoriapacote_id` bigint unsigned DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id`),
+  KEY `pacote_categoriapacote_id_foreign` (`categoriapacote_id`),
+  CONSTRAINT `pacote_categoriapacote_id_foreign` FOREIGN KEY (`categoriapacote_id`) REFERENCES `pacote` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela db_aula.pacote: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela db_aula.pacote: ~1 rows (aproximadamente)
+INSERT INTO `pacote` (`id`, `nome`, `descricao`, `valor`, `imagem`, `categoriapacote_id`, `created_at`, `updated_at`) VALUES
+	(1, 'Paccsubic', 'cohndushuv', '541964', 'imagem/20230628165858.jpg', 1, '2023-06-28 19:58:58', '2023-06-28 19:58:58');
 
 -- Copiando estrutura para tabela db_aula.password_resets
 CREATE TABLE IF NOT EXISTS `password_resets` (
@@ -188,7 +194,7 @@ CREATE TABLE IF NOT EXISTS `produto` (
   PRIMARY KEY (`id`),
   KEY `produto_categoriaproduto_id_foreign` (`categoriaproduto_id`),
   CONSTRAINT `produto_categoriaproduto_id_foreign` FOREIGN KEY (`categoriaproduto_id`) REFERENCES `categoriaproduto` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Copiando dados para a tabela db_aula.produto: ~0 rows (aproximadamente)
 INSERT INTO `produto` (`id`, `nome`, `quantidade`, `valor`, `imagemproduto`, `categoriaproduto_id`, `created_at`, `updated_at`) VALUES
@@ -208,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela db_aula.users: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela db_aula.users: ~1 rows (aproximadamente)
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 	(1, 'admin', 'admin@admin.com', NULL, '$2y$10$64proLIND7wcWsOWRGXL6.Yl8Fnwmbv6qFmqfJFzEmaXn/eOpMmki', NULL, '2023-06-16 20:07:03', '2023-06-16 20:07:03');
 

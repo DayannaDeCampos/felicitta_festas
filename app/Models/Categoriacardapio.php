@@ -10,4 +10,8 @@ class CategoriaCardapio extends Model
     use HasFactory;
 
     protected $table = "categoriacardapio";
+
+    protected $fillable = [
+        'nome'
+    ];
 }

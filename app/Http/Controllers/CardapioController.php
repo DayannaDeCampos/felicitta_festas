@@ -153,21 +153,22 @@ class CardapioController extends Controller
         );
 
         return \redirect()->action(
-            'App\Http\Controllers\cardapioController@index'
+            'App\Http\Controllers\CardapioController@index'
         );
     }
     //
 
+
     function destroy($id)
     {
         $cardapio = Cardapio::findOrFail($id);
-        if($cardapio->imagemcardapio){
+        if (Storage::disk('public')->exists($cardapio->imagemcardapio)) {
             Storage::disk('public')->delete($cardapio->imagemcardapio);
         }
         $cardapio->delete();
 
         return \redirect()->action(
-            'App\Http\Controllers\cardapioController@index'
+            'App\Http\Controllers\CardapioController@index'
         );
 
     }
