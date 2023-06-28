@@ -91,7 +91,7 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Nome</th>
-                    <th scope="col">Quantidade</th>
+                    <th scope="col">Descrição</th>
                     <th scope="col">Valor</th>
                     <th scope="col">Categoria</th>
                     <th scope="col"></th>
