@@ -28,6 +28,12 @@ Route::get('dashboard', function () {
     ->middleware(['auth', 'verified'])
     ->name('admin');
 
+    Route::get('principal', function () {
+        return view('principal');
+    })
+        ->middleware(['auth', 'verified'])
+        ->name('principal');
+
 
 
 Route::middleware('auth')->group(function () {

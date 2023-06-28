@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('descricao',700);
             $table->string('valor',100);
             $table->string('imagem',150)->nullable();
-            $table->foreignId('categoriapacote_id')->nullable()->constrained('pacote')->default(null);
+            $table->foreignId('categoriapacote_id')->nullable()->constrained('categoriapacote')->default(null);
 
             $table->timestamps();
         });

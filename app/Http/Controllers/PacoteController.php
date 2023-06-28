@@ -29,7 +29,7 @@ class PacoteController extends Controller
         $request->validate(
             [
                 'nome' => 'required | max: 120',
-                'descricao' => 'required  | max: 50',
+                'descricao' => 'required  | max: 700',
                 'valor' => 'required | max: 50',
 
                 'categoriapacote_id' => ' nullable',
@@ -39,7 +39,7 @@ class PacoteController extends Controller
                 'nome.required' => 'O nome é obrigatório',
                 'nome.max' => 'Só é permitido 120 caracteres',
                 'descricao.required' => 'A descrição é obrigatória',
-                'descricao.max' => 'Só é permitido 50 caracteres',
+                'descricao.max' => 'Só é permitido 700 caracteres',
                 'valor.required' => 'O valor é obrigatório',
                 'valor.max' => 'Só é permitido 50 caracteres',
 
@@ -107,7 +107,7 @@ class PacoteController extends Controller
         $request->validate(
             [
                 'nome' => 'required | max: 120',
-                'descricao' => 'required  | max: 50',
+                'descricao' => 'required  | max: 700',
                 'valor' => 'required | max: 50',
 
                 'categoriapacote_id' => ' nullable',
@@ -117,7 +117,7 @@ class PacoteController extends Controller
                 'nome.required' => 'O nome é obrigatório',
                 'nome.max' => 'Só é permitido 120 caracteres',
                 'descricao.required' => 'A descrição é obrigatória',
-                'descricao.max' => 'Só é permitido 50 caracteres',
+                'descricao.max' => 'Só é permitido 700 caracteres',
                 'valor.required' => 'O valor é obrigatório',
                 'valor.max' => 'Só é permitido 50 caracteres',
 
@@ -160,8 +160,10 @@ class PacoteController extends Controller
 
     function destroy($id)
     {
+
         $pacote = Pacote::findOrFail($id);
-            if (Storage::disk('public')->exists($pacote->imagem)) {
+
+        if (!empty($pacote->imagem) && Storage::disk('public')->exists($pacote->imagem)  ) {
                 Storage::disk('public')->delete($pacote->imagem);
             }
         $pacote->delete();
@@ -180,10 +182,12 @@ class PacoteController extends Controller
             } else {
                 $pacotes = Pacote::all();
             }
-
+            
         return view('PacoteList')->with(['pacotes' => $pacotes]);
     }
 }
+
+
 // npm install --save-dev vite laravel-vite-plugin
 // npm install --save-dev @vitejs/plugin-vue
 // npm run build

@@ -162,7 +162,7 @@ class CardapioController extends Controller
     function destroy($id)
     {
         $cardapio = Cardapio::findOrFail($id);
-        if (Storage::disk('public')->exists($cardapio->imagemcardapio)) {
+        if (!empty($cardapio->imagemcardapio) && Storage::disk('public')->exists($cardapio->imagemcardapio)  ) {
             Storage::disk('public')->delete($cardapio->imagemcardapio);
         }
         $cardapio->delete();
@@ -185,7 +185,7 @@ class CardapioController extends Controller
         return view('CardapioList')->with(['cardapios' => $cardapios]);
     }
 }
-// npm install --save-dev vite laravel-vite-plugin
+
 // npm install --save-dev @vitejs/plugin-vue
 // npm run build
 
